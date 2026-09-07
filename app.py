@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from datetime import datetime
 import sqlite3
 import config
 
@@ -22,6 +23,7 @@ def crear_tabla():
             correo TEXT,
             asunto TEXT,
             mensaje TEXT
+            fecha TEXT
         )
     """)
     conexion.commit()
@@ -29,15 +31,19 @@ def crear_tabla():
 
 
 def guardar(nombre, correo, asunto, mensaje):
+    fecha = datetime.now().strftime("%d/%m/%Y %H:%M")
     conexion = conectar()
     cursor = conexion.execute(
-        "INSERT INTO mensajes (nombre, correo, asunto, mensaje) VALUES (?, ?, ?, ?)",
-        (nombre, correo, asunto, mensaje)
+        "INSERT INTO mensajes (nombre, correo, asunto, mensaje, fecha) VALUES (?, ?, ?, ?, ?)",
+        (nombre, correo, asunto, mensaje, fecha)
     )
     conexion.commit()
     numero = cursor.lastrowid
     conexion.close()
     return numero
+
+
+LARGOS = {"nombre": 80, "correo": 120, "asunto": 40, "mensaje": 1000}
 
 
 def correo_valido(correo):
@@ -51,14 +57,22 @@ def validar(nombre, correo, asunto, mensaje):
     errores = []
     if nombre == "":
         errores.append("El nombre es obligatorio.")
+    elif len(nombre) > LARGOS["nombre"]:
+        errores.append("El nombre no puede superar los 80 caracteres.")
     if correo == "":
         errores.append("El correo es obligatorio.")
     elif not correo_valido(correo):
         errores.append("El correo no tiene un formato valido.")
+    elif len(correo) > LARGOS["correo"]:
+        errores.append("El correo no puede superar los 120 caracteres.")
     if asunto == "":
         errores.append("Debe elegir un asunto.")
+    elif len(asunto) > LARGOS["asunto"]:
+        errores.append("El asunto no puede superar los 40 caracteres.")
     if mensaje == "":
         errores.append("El mensaje es obligatorio.")
+    elif len(mensaje) > LARGOS["mensaje"]:
+        errores.append("El mensaje no puede superar los 1000 caracteres.")
     return errores
 
 
