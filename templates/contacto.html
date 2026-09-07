@@ -13,10 +13,10 @@
 
     <form method="POST">
         <label>Nombre</label>
-        <input type="text" name="nombre" value="{{ datos.nombre }}">
+        <input type="text" name="nombre" value="{{ datos.nombre }}" maxlength="80">
 
         <label>Correo</label>
-        <input type="text" name="correo" value="{{ datos.correo }}">
+        <input type="text" name="correo" value="{{ datos.correo }}" maxlength="120">
 
         <label>Asunto</label>
         <select name="asunto">
@@ -27,7 +27,7 @@
         </select>
 
         <label>Mensaje</label>
-        <textarea name="mensaje" rows="5">{{ datos.mensaje }}</textarea>
+        <textarea name="mensaje" rows="5" maxlength="1000">{{ datos.mensaje }}</textarea>
 
         <button type="submit">Enviar</button>
     </form>
