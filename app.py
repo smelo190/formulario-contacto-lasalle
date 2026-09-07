@@ -46,6 +46,13 @@ def guardar(nombre, correo, asunto, mensaje):
 LARGOS = {"nombre": 80, "correo": 120, "asunto": 40, "mensaje": 1000}
 
 
+def correo_valido(correo):
+    if correo.count("@") != 1:
+        return False
+    usuario, dominio = correo.split("@")
+    return usuario != "" and "." in dominio and not dominio.endswith(".")
+
+
 def validar(nombre, correo, asunto, mensaje):
     errores = []
     if nombre == "":
@@ -54,7 +61,7 @@ def validar(nombre, correo, asunto, mensaje):
         errores.append("El nombre no puede superar los 80 caracteres.")
     if correo == "":
         errores.append("El correo es obligatorio.")
-    elif "@" not in correo:
+    elif not correo_valido(correo):
         errores.append("El correo no tiene un formato valido.")
     elif len(correo) > LARGOS["correo"]:
         errores.append("El correo no puede superar los 120 caracteres.")
