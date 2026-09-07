@@ -63,20 +63,21 @@ def inicio():
 @app.route("/contacto", methods=["GET", "POST"])
 def contacto():
     errores = []
+    datos = {"nombre": "", "correo": "", "asunto": "", "mensaje": ""}
 
     if request.method == "POST":
-        nombre = request.form["nombre"].strip()
-        correo = request.form["correo"].strip()
-        asunto = request.form["asunto"].strip()
-        mensaje = request.form["mensaje"].strip()
+        datos["nombre"] = request.form["nombre"].strip()
+        datos["correo"] = request.form["correo"].strip()
+        datos["asunto"] = request.form["asunto"].strip()
+        datos["mensaje"] = request.form["mensaje"].strip()
 
-        errores = validar(nombre, correo, asunto, mensaje)
+        errores = validar(datos["nombre"], datos["correo"], datos["asunto"], datos["mensaje"])
 
         if errores == []:
-            numero = guardar(nombre, correo, asunto, mensaje)
+            numero = guardar(datos["nombre"], datos["correo"], datos["asunto"], datos["mensaje"])
             return redirect(url_for("confirmacion", numero=numero))
 
-    return render_template("contacto.html", asuntos=ASUNTOS, errores=errores)
+    return render_template("contacto.html", asuntos=ASUNTOS, errores=errores, datos=datos)
 
 
 @app.route("/confirmacion/<numero>")
