@@ -13,21 +13,21 @@
 
     <form method="POST">
         <label>Nombre</label>
-        <input type="text" name="nombre">
+        <input type="text" name="nombre" value="{{ datos.nombre }}">
 
         <label>Correo</label>
-        <input type="text" name="correo">
+        <input type="text" name="correo" value="{{ datos.correo }}">
 
         <label>Asunto</label>
         <select name="asunto">
             <option value="">Elija una opcion</option>
             {% for asunto in asuntos %}
-                <option value="{{ asunto }}">{{ asunto }}</option>
+                <option value="{{ asunto }}" {% if asunto == datos.asunto %}selected{% endif %}>{{ asunto }}</option>
             {% endfor %}
         </select>
 
         <label>Mensaje</label>
-        <textarea name="mensaje" rows="5"></textarea>
+        <textarea name="mensaje" rows="5">{{ datos.mensaje }}</textarea>
 
         <button type="submit">Enviar</button>
     </form>
