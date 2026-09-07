@@ -40,13 +40,20 @@ def guardar(nombre, correo, asunto, mensaje):
     return numero
 
 
+def correo_valido(correo):
+    if correo.count("@") != 1:
+        return False
+    usuario, dominio = correo.split("@")
+    return usuario != "" and "." in dominio and not dominio.endswith(".")
+
+
 def validar(nombre, correo, asunto, mensaje):
     errores = []
     if nombre == "":
         errores.append("El nombre es obligatorio.")
     if correo == "":
         errores.append("El correo es obligatorio.")
-    elif "@" not in correo:
+    elif not correo_valido(correo):
         errores.append("El correo no tiene un formato valido.")
     if asunto == "":
         errores.append("Debe elegir un asunto.")
