@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+﻿from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
 import sqlite3
 import config
@@ -22,7 +22,7 @@ def crear_tabla():
             nombre TEXT,
             correo TEXT,
             asunto TEXT,
-            mensaje TEXT
+            mensaje TEXT,
             fecha TEXT
         )
     """)
