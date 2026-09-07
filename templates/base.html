@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de contacto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #222;
+        }
+        nav a {
+            margin-right: 15px;
+            color: #0b5ed7;
+            text-decoration: none;
+        }
+        h1 { font-size: 22px; }
+        label { display: block; margin-top: 12px; }
+        input, select, textarea {
+            width: 100%;
+            padding: 7px;
+            margin-top: 4px;
+            border: 1px solid #bbb;
+        }
+        button {
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: #0b5ed7;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .errores {
+            background: #fdecea;
+            border: 1px solid #e0b4b4;
+            padding: 10px 15px;
+            margin-top: 15px;
+        }
+        table { border-collapse: collapse; width: 100%; margin-top: 15px; }
+        th, td { border: 1px solid #ccc; padding: 7px; text-align: left; }
+        th { background: #eee; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Inicio</a>
+        <a href="/contacto">Contacto</a>
+        <a href="/mensajes">Mensajes</a>
+    </nav>
+    <hr>
+
+    {% block contenido %}{% endblock %}
+
+</body>
+</html>

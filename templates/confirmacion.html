@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+    <h1>Mensaje enviado</h1>
+    <p>El mensaje se guardo con el numero {{ mensaje["id"] }}.</p>
+
+    <table>
+        <tr><th>Nombre</th><td>{{ mensaje["nombre"] }}</td></tr>
+        <tr><th>Correo</th><td>{{ mensaje["correo"] }}</td></tr>
+        <tr><th>Asunto</th><td>{{ mensaje["asunto"] }}</td></tr>
+        <tr><th>Mensaje</th><td>{{ mensaje["mensaje"] }}</td></tr>
+    </table>
+
+    <p><a href="/contacto">Escribir otro mensaje</a></p>
+{% endblock %}

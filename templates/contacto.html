@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+    <h1>Escribir un mensaje</h1>
+
+    {% if errores %}
+        <div class="errores">
+            {% for error in errores %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="POST">
+        <label>Nombre</label>
+        <input type="text" name="nombre">
+
+        <label>Correo</label>
+        <input type="text" name="correo">
+
+        <label>Asunto</label>
+        <select name="asunto">
+            <option value="">Elija una opcion</option>
+            {% for asunto in asuntos %}
+                <option value="{{ asunto }}">{{ asunto }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Mensaje</label>
+        <textarea name="mensaje" rows="5"></textarea>
+
+        <button type="submit">Enviar</button>
+    </form>
+{% endblock %}

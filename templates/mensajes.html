@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+    <h1>Mensajes guardados</h1>
+    <p>Ambiente: {{ ambiente }}</p>
+
+    {% if lista %}
+        <table>
+            <tr>
+                <th>N</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Asunto</th>
+                <th>Mensaje</th>
+            </tr>
+            {% for m in lista %}
+                <tr>
+                    <td>{{ m["id"] }}</td>
+                    <td>{{ m["nombre"] }}</td>
+                    <td>{{ m["correo"] }}</td>
+                    <td>{{ m["asunto"] }}</td>
+                    <td>{{ m["mensaje"] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Todavia no hay mensajes en este ambiente.</p>
+    {% endif %}
+{% endblock %}
