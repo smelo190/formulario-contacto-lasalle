@@ -40,18 +40,29 @@ def guardar(nombre, correo, asunto, mensaje):
     return numero
 
 
+LARGOS = {"nombre": 80, "correo": 120, "asunto": 40, "mensaje": 1000}
+
+
 def validar(nombre, correo, asunto, mensaje):
     errores = []
     if nombre == "":
         errores.append("El nombre es obligatorio.")
+    elif len(nombre) > LARGOS["nombre"]:
+        errores.append("El nombre no puede superar los 80 caracteres.")
     if correo == "":
         errores.append("El correo es obligatorio.")
     elif "@" not in correo:
         errores.append("El correo no tiene un formato valido.")
+    elif len(correo) > LARGOS["correo"]:
+        errores.append("El correo no puede superar los 120 caracteres.")
     if asunto == "":
         errores.append("Debe elegir un asunto.")
+    elif len(asunto) > LARGOS["asunto"]:
+        errores.append("El asunto no puede superar los 40 caracteres.")
     if mensaje == "":
         errores.append("El mensaje es obligatorio.")
+    elif len(mensaje) > LARGOS["mensaje"]:
+        errores.append("El mensaje no puede superar los 1000 caracteres.")
     return errores
 
 
