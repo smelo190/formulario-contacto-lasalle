@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from datetime import datetime
 import sqlite3
 import config
 
@@ -22,6 +23,7 @@ def crear_tabla():
             correo TEXT,
             asunto TEXT,
             mensaje TEXT
+            fecha TEXT
         )
     """)
     conexion.commit()
@@ -29,10 +31,11 @@ def crear_tabla():
 
 
 def guardar(nombre, correo, asunto, mensaje):
+    fecha = datetime.now().strftime("%d/%m/%Y %H:%M")
     conexion = conectar()
     cursor = conexion.execute(
-        "INSERT INTO mensajes (nombre, correo, asunto, mensaje) VALUES (?, ?, ?, ?)",
-        (nombre, correo, asunto, mensaje)
+        "INSERT INTO mensajes (nombre, correo, asunto, mensaje, fecha) VALUES (?, ?, ?, ?, ?)",
+        (nombre, correo, asunto, mensaje, fecha)
     )
     conexion.commit()
     numero = cursor.lastrowid
