@@ -1,4 +1,4 @@
-﻿from flask import Flask, render_template, request, redirect, url_for
+﻿from flask import Flask, render_template, request, redirect, url_for, abort
 from datetime import datetime
 import sqlite3
 import config
@@ -106,8 +106,11 @@ def confirmacion(numero):
     conexion = conectar()
     mensaje = conexion.execute("SELECT * FROM mensajes WHERE id = ?", (numero,)).fetchone()
     conexion.close()
-    return render_template("confirmacion.html", mensaje=mensaje)
 
+    if mensaje is None:
+        abort(404)
+
+    return render_template("confirmacion.html", mensaje=mensaje)
 
 @app.route("/mensajes")
 def mensajes():
